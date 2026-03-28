@@ -85,7 +85,7 @@ const Hero = () => {
                 href="tel:+68987289350"
                 className="hero-cta flex items-center justify-center gap-2 px-8 py-4 bg-gold text-slate-950 rounded-2xl font-black text-lg shadow-2xl shadow-gold/20 hover:bg-gold-hover transition-all"
               >
-                < Phone size={20} fill="currentColor" />
+                <Phone size={20} fill="currentColor" />
                 Appeler : 87 28 93 50
               </motion.a>
               <motion.a
