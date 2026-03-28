@@ -5,6 +5,8 @@ import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
+import heroImage from '@/assets/hero_roof.png';
+
 gsap.registerPlugin(ScrollTrigger);
 
 const CTA = () => {
@@ -104,9 +106,9 @@ const CTA = () => {
 
             {/* Right Side (Expertise Visual) */}
             <div className="relative group perspective-1000 hidden md:block">
-               <div className="aspect-[4/5] rounded-[3rem] bg-slate-900 border border-white/10 flex items-center justify-center relative overflow-hidden shadow-2xl transform-gpu group-hover:rotate-y-5 transition-transform duration-1000">
+               <div className="aspect-[4/5] rounded-[3rem] bg-slate-900 border border-white/10 flex items-center justify-center relative overflow-hidden shadow-2xl transform-gpu group-hover:rotate-y-2 transition-transform duration-1000">
                   <img 
-                    src="/assets/images/hero_roof.png" 
+                    src={heroImage} 
                     alt="Toiture Tahiti"
                     className="absolute inset-0 w-full h-full object-cover brightness-[0.3] group-hover:scale-110 transition-transform duration-1000"
                   />
