@@ -1,10 +1,33 @@
-// Removed unused React import
+import { useRef } from 'react';
 import { Phone, ArrowRight, CheckCircle2 } from 'lucide-react';
 import { motion, useScroll } from 'framer-motion';
+import gsap from 'gsap';
+import { useGSAP } from '@gsap/react';
 
 const Hero = () => {
+  const containerRef = useRef(null);
+  
+  useGSAP(() => {
+    const tl = gsap.timeline({ defaults: { ease: 'power4.out', duration: 1.2 } });
+
+    // Animation d'entrée premium
+    tl.from('.hero-badge', { opacity: 0, y: 20, duration: 0.8 }, 0.2)
+      .from('.hero-title-line', { 
+        y: 100, 
+        opacity: 0, 
+        stagger: 0.2, 
+        duration: 1.5 
+      }, 0.4)
+      .from('.hero-subtitle', { opacity: 0, y: 30 }, 0.8)
+      .from('.hero-features div', { opacity: 0, scale: 0.9, stagger: 0.1 }, 1)
+      .from('.hero-cta', { opacity: 0, y: 20, stagger: 0.2 }, 1.2);
+  }, { scope: containerRef });
+
   return (
-    <section className="relative min-h-[90vh] flex items-center pt-20 overflow-hidden">
+    <section 
+      ref={containerRef}
+      className="relative min-h-[95vh] flex items-center pt-20 overflow-hidden"
+    >
       {/* Background with Parallax Image */}
       <div className="absolute inset-0 z-0 overflow-hidden">
         <motion.div 
@@ -12,47 +35,40 @@ const Hero = () => {
           className="absolute inset-0"
         >
           <img 
-            src="/Users/oliviahonore/.gemini/antigravity/brain/d069c57a-5cb4-40c6-a4b3-738438105700/premium_roof_tahiti_1774708374441.png" 
+            src="/assets/images/hero_roof.png" 
             alt="Toiture Premium Tahiti"
-            className="w-full h-full object-cover brightness-[0.3]"
+            className="w-full h-full object-cover brightness-[0.35]"
           />
-          <div className="absolute inset-0 bg-gradient-to-b from-slate-950/20 via-slate-950/40 to-slate-950" />
+          <div className="absolute inset-0 bg-gradient-to-b from-slate-950/40 via-slate-950/60 to-slate-950" />
+          
+          {/* Animated Mesh Noise Overlay */}
+          <div className="absolute inset-0 opacity-[0.03] pointer-events-none bg-[url('https://grainy-gradients.vercel.app/noise.svg')]" />
         </motion.div>
       </div>
 
       <div className="max-w-7xl mx-auto px-6 relative z-10 w-full">
         <div className="grid lg:grid-cols-2 gap-16 items-center">
           {/* Left Content */}
-          <motion.div
-            initial={{ opacity: 0, x: -50 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8, ease: 'easeOut' }}
-            className="space-y-8"
-          >
+          <div className="space-y-8">
             {/* Badge */}
-            <motion.div
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.2 }}
-              className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass-gold border-gold/20"
-            >
-              <div className="w-2 h-2 rounded-full bg-gold animate-pulse" />
+            <div className="hero-badge inline-flex items-center gap-2 px-4 py-2 rounded-full glass-gold border-gold/20">
+              <div className="w-2 h-2 rounded-full bg-gold animate-pulse-gold" />
               <span className="text-xs font-bold uppercase tracking-wider text-gold">Expert Couvreur à Tahiti</span>
-            </motion.div>
+            </div>
 
             {/* Headline */}
-            <div className="space-y-6">
+            <div className="space-y-6 overflow-hidden">
               <h1 className="text-6xl md:text-8xl font-display italic leading-[1] text-white">
-                Votre toit <br />
-                <span className="text-gradient not-italic font-black">mérite l'excellence</span>
+                <span className="hero-title-line block">Votre toit</span>
+                <span className="hero-title-line block text-gradient not-italic font-black">mérite l'excellence</span>
               </h1>
-              <p className="text-xl md:text-2xl text-slate-400 max-w-xl leading-relaxed font-light">
+              <p className="hero-subtitle text-xl md:text-2xl text-slate-400 max-w-xl leading-relaxed font-light">
                 Artisan couvreur spécialisé en rénovation et protection de toitures tropicales à Tahiti.
               </p>
             </div>
 
             {/* Features List */}
-            <div className="grid sm:grid-cols-2 gap-4">
+            <div className="hero-features grid sm:grid-cols-2 gap-4">
               {['Devis gratuit sous 48h', 'Garantie décennale', 'Matériaux anticorrosion', 'Intervention rapide'].map((item) => (
                 <div key={item} className="flex items-center gap-2 text-slate-300">
                   <CheckCircle2 size={18} className="text-gold" />
@@ -64,21 +80,21 @@ const Hero = () => {
             {/* CTA Buttons */}
             <div className="flex flex-col sm:flex-row gap-4 pt-4">
               <motion.a
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
                 href="tel:+68987289350"
-                className="flex items-center justify-center gap-2 px-8 py-4 bg-gold text-slate-950 rounded-2xl font-black text-lg shadow-xl shadow-gold/20 hover:bg-gold-hover transition-all"
+                className="hero-cta flex items-center justify-center gap-2 px-8 py-4 bg-gold text-slate-950 rounded-2xl font-black text-lg shadow-2xl shadow-gold/20 hover:bg-gold-hover transition-all"
               >
-                <Phone size={20} fill="currentColor" />
+                < Phone size={20} fill="currentColor" />
                 Appeler : 87 28 93 50
               </motion.a>
               <motion.a
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
                 href="https://wa.me/68987289350"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center justify-center gap-2 px-8 py-4 glass border-white/10 rounded-2xl font-bold text-lg hover:bg-white/5 transition-all"
+                className="hero-cta flex items-center justify-center gap-2 px-8 py-4 glass border-white/10 rounded-2xl font-bold text-lg hover:bg-white/5 transition-all"
               >
                 WhatsApp
                 <ArrowRight size={20} />
@@ -86,58 +102,75 @@ const Hero = () => {
             </div>
 
             {/* Micro Social Proof */}
-            <div className="pt-6">
+            <motion.div 
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 2 }}
+              className="pt-6"
+            >
               <p className="text-sm text-slate-500 font-medium italic">
                 Papeete · Punaauia · Faa'a · Mahina · Arue...
               </p>
-            </div>
-          </motion.div>
+            </motion.div>
+          </div>
 
-          {/* Right Visual (Bento-like Card) */}
+          {/* Right Visual (Interactive Feature Card) */}
           <motion.div
-            initial={{ opacity: 0, scale: 0.8 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 1, ease: 'easeOut', delay: 0.3 }}
-            className="relative hidden lg:block"
+            initial={{ opacity: 0, scale: 0.9, rotateY: 20 }}
+            animate={{ opacity: 1, scale: 1, rotateY: 0 }}
+            transition={{ duration: 1.2, ease: 'easeOut', delay: 0.5 }}
+            className="relative hidden lg:block perspective-1000"
           >
-            {/* Main Visual Card */}
-            <div className="aspect-[4/5] rounded-[2.5rem] overflow-hidden border border-white/10 shadow-2xl relative group">
+            {/* Main Visual Card with Tilt Effect */}
+            <div className="aspect-[4/5] rounded-[2.5rem] overflow-hidden border border-white/10 shadow-2xl relative group transform-gpu transition-transform duration-500 hover:rotate-x-2 hover:rotate-y-2">
               <img 
-                src="/Users/oliviahonore/.gemini/antigravity/brain/d069c57a-5cb4-40c6-a4b3-738438105700/premium_roof_tahiti_1774708374441.png" 
+                src="/assets/images/hero_roof.png" 
                 alt="Expertise Toiture"
                 className="absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition-transform duration-1000"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-transparent to-transparent opacity-60" />
+              <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/20 to-transparent opacity-80" />
               
+              {/* Floating Glass Badge */}
+              <div className="absolute top-8 right-8 p-4 glass rounded-2xl border-white/20">
+                <p className="text-gold font-black text-2xl">10+</p>
+                <p className="text-[10px] uppercase tracking-tighter text-slate-400">Ans d'expérience</p>
+              </div>
+
               {/* Floating Overlay Card */}
               <motion.div
-                animate={{ y: [0, -10, 0] }}
-                transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
-                className="absolute bottom-8 left-8 right-8 p-6 glass rounded-2xl border-gold/10"
+                animate={{ y: [0, -12, 0] }}
+                transition={{ duration: 5, repeat: Infinity, ease: 'easeInOut' }}
+                className="absolute bottom-10 left-8 right-8 p-8 glass rounded-[2rem] border-gold/20"
               >
-                <div className="flex items-center gap-4 mb-4">
-                  <div className="w-12 h-12 rounded-full bg-gold/20 flex items-center justify-center text-gold">
-                    <CheckCircle2 size={24} />
+                <div className="flex items-center gap-5 mb-6">
+                  <div className="w-14 h-14 rounded-full bg-gold/20 flex items-center justify-center text-gold shadow-inner">
+                    <CheckCircle2 size={32} />
                   </div>
                   <div>
-                    <p className="text-white font-bold">100% Qualité</p>
-                    <p className="text-xs text-slate-400">Satisfaction garantie à Tahiti</p>
+                    <h3 className="text-white text-xl font-black italic">100% Qualité</h3>
+                    <p className="text-sm text-slate-400">Satisfaction garantie à Tahiti</p>
                   </div>
                 </div>
-                <div className="w-full h-1 bg-white/5 rounded-full overflow-hidden">
-                   <motion.div 
-                     initial={{ width: 0 }}
-                     animate={{ width: '100%' }}
-                     transition={{ duration: 2, delay: 1 }}
-                     className="h-full bg-gold" 
-                   />
+                <div className="space-y-2">
+                  <div className="flex justify-between text-[10px] uppercase text-gold font-bold">
+                    <span>Performance</span>
+                    <span>100%</span>
+                  </div>
+                  <div className="w-full h-1.5 bg-white/5 rounded-full overflow-hidden">
+                     <motion.div 
+                       initial={{ width: 0 }}
+                       whileInView={{ width: '100%' }}
+                       transition={{ duration: 2.5, delay: 1 }}
+                       className="h-full bg-gradient-to-r from-gold to-amber-200" 
+                     />
+                  </div>
                 </div>
               </motion.div>
             </div>
 
-            {/* Accents Elements */}
-            <div className="absolute -top-6 -right-6 w-32 h-32 bg-tropical/10 blur-3xl rounded-full" />
-            <div className="absolute -bottom-10 -left-10 w-48 h-48 bg-gold/10 blur-3xl rounded-full" />
+            {/* Decorative Orbs */}
+            <div className="absolute -top-12 -right-12 w-40 h-40 bg-gold/10 blur-[100px] rounded-full animate-pulse" />
+            <div className="absolute -bottom-20 -left-20 w-60 h-60 bg-tropical/10 blur-[120px] rounded-full animate-pulse" />
           </motion.div>
         </div>
       </div>

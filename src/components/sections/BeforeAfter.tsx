@@ -1,8 +1,13 @@
-import { useState } from 'react';
-import { motion } from 'framer-motion';
+import { useState, useRef } from 'react';
+import gsap from 'gsap';
+import { useGSAP } from '@gsap/react';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+gsap.registerPlugin(ScrollTrigger);
 
 const BeforeAfter = () => {
   const [sliderPosition, setSliderPosition] = useState(50);
+  const containerRef = useRef(null);
 
   const handleMove = (e: React.MouseEvent | React.TouchEvent) => {
     const container = e.currentTarget.getBoundingClientRect();
@@ -11,90 +16,101 @@ const BeforeAfter = () => {
     setSliderPosition(Math.min(Math.max(position, 0), 100));
   };
 
+  useGSAP(() => {
+    gsap.from('.ba-header', {
+      scrollTrigger: {
+        trigger: '.ba-header',
+        start: 'top 85%',
+      },
+      y: 30,
+      opacity: 0,
+      duration: 1,
+      ease: 'power3.out'
+    });
+
+    gsap.from('.ba-slider', {
+      scrollTrigger: {
+        trigger: '.ba-slider',
+        start: 'top 80%',
+      },
+      scale: 0.95,
+      opacity: 0,
+      duration: 1.2,
+      ease: 'power4.out'
+    });
+  }, { scope: containerRef });
+
   return (
-    <section id="gallery" className="section-padding bg-slate-900 overflow-hidden">
+    <section 
+      id="gallery" 
+      ref={containerRef}
+      className="section-padding bg-slate-900 overflow-hidden"
+    >
       <div className="max-w-7xl mx-auto px-6">
-        <div className="text-center mb-16 space-y-4">
-          <motion.p
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            className="text-gold font-bold uppercase tracking-[0.2em] text-xs"
-          >
+        <div className="ba-header text-center mb-16 space-y-4">
+          <p className="text-gold font-bold uppercase tracking-[0.3em] text-[10px]">
             Preuve Visuelle
-          </motion.p>
-          <motion.h2
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            className="text-4xl md:text-5xl font-black text-white"
-          >
-            Des résultats <span className="text-gradient">spectaculaires</span>
-          </motion.h2>
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.1 }}
-            className="text-slate-400 max-w-2xl mx-auto"
-          >
-            Déplacez le curseur pour comparer l'état initial et le résultat après notre intervention.
-          </motion.p>
+          </p>
+          <h2 className="text-4xl md:text-5xl font-black text-white italic leading-tight">
+            Des résultats <br className="md:hidden" />
+            <span className="text-gradient not-italic">spectaculaires</span>
+          </h2>
+          <div className="w-16 h-1 bg-gold/20 mx-auto mt-6 rounded-full" />
         </div>
 
-        <motion.div
-          initial={{ opacity: 0, scale: 0.95 }}
-          whileInView={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.8 }}
-          className="relative aspect-video md:aspect-[21/9] rounded-[2.5rem] overflow-hidden border border-white/10 shadow-2xl cursor-ew-resize select-none group"
+        <div
+          className="ba-slider relative aspect-video md:aspect-[21/9] rounded-[3rem] overflow-hidden border border-white/5 shadow-2xl cursor-ew-resize select-none group"
           onMouseMove={handleMove}
           onTouchMove={handleMove}
         >
-          {/* After Image (Background) */}
+          {/* After Image (Background) - Placeholder text as per original code */}
           <div className="absolute inset-0 bg-slate-800">
-             <div className="w-full h-full flex items-center justify-center">
-                <p className="text-gold font-bold text-3xl opacity-20 uppercase tracking-[0.5em]">Après Rénovation</p>
+             <div className="w-full h-full flex items-center justify-center bg-[radial-gradient(circle_at_center,rgba(212,175,55,0.05)_0%,transparent_70%)]">
+                <p className="text-gold font-black text-4xl opacity-20 uppercase tracking-[0.8em] italic">Après</p>
              </div>
           </div>
           
           {/* Before Image (Overlay) */}
           <div 
-            className="absolute inset-0 bg-slate-700 overflow-hidden"
+            className="absolute inset-0 bg-slate-700 overflow-hidden border-r-2 border-gold/50"
             style={{ width: `${sliderPosition}%` }}
           >
-            <div className="w-[100vw] h-full absolute top-0 left-0 bg-slate-700 flex items-center justify-center" style={{ width: '100%' }}>
-               <p className="text-white font-bold text-3xl opacity-20 uppercase tracking-[0.5em]">Avant Travaux</p>
+            <div className="w-[100vw] h-full absolute top-0 left-0 bg-slate-700 flex items-center justify-center" style={{ width: '100vw' }}>
+               <p className="text-white font-black text-4xl opacity-20 uppercase tracking-[0.8em] italic">Avant</p>
             </div>
           </div>
 
-          {/* Slider Line */}
+          {/* Slider Controller */}
           <div 
-            className="absolute top-0 bottom-0 w-1 bg-gold z-20"
+            className="absolute top-0 bottom-0 w-px bg-gold/50 z-20 pointer-events-none"
             style={{ left: `${sliderPosition}%` }}
           >
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-gold shadow-2xl shadow-gold/50 flex items-center justify-center pointer-events-none">
-              <div className="flex gap-1">
-                <div className="w-1 h-3 bg-slate-950 rounded-full" />
-                <div className="w-1 h-3 bg-slate-950 rounded-full" />
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-16 h-16 rounded-full glass border-gold/30 shadow-[0_0_30px_rgba(212,175,55,0.2)] flex items-center justify-center group-hover:scale-110 transition-transform duration-500">
+              <div className="flex gap-1.5 transform group-hover:scale-110 transition-transform">
+                <div className="w-1 h-4 bg-gold rounded-full" />
+                <div className="w-1 h-4 bg-gold rounded-full" />
               </div>
-            </div>
-            
-            <div className="absolute top-8 left-1/2 -translate-x-1/2 whitespace-nowrap">
-               <span className="px-3 py-1 glass-gold rounded-full text-[10px] font-bold text-gold uppercase tracking-widest shadow-lg">Curseur</span>
             </div>
           </div>
 
           {/* Labels */}
-          <div className="absolute bottom-8 left-8 z-30 pointer-events-none">
-             <span className="px-4 py-2 glass rounded-xl text-xs font-bold text-white uppercase tracking-widest border-white/20">Avant</span>
+          <div className="absolute bottom-10 left-10 z-30 pointer-events-none group-hover:translate-x-2 transition-transform duration-500">
+             <span className="px-6 py-3 glass rounded-2xl text-[10px] font-black text-white uppercase tracking-[0.2em] border-white/10 shadow-2xl">État Initial</span>
           </div>
-          <div className="absolute bottom-8 right-8 z-30 pointer-events-none">
-             <span className="px-4 py-2 glass rounded-xl text-xs font-bold text-white uppercase tracking-widest border-white/20">Après</span>
+          <div className="absolute bottom-10 right-10 z-30 pointer-events-none group-hover:-translate-x-2 transition-transform duration-500">
+             <span className="px-6 py-3 glass rounded-2xl text-[10px] font-black text-gold uppercase tracking-[0.2em] border-gold/20 shadow-2xl">Résultat Expert</span>
           </div>
-        </motion.div>
+          
+          {/* Grain texture for premium look */}
+          <div className="absolute inset-0 opacity-[0.03] pointer-events-none bg-[url('https://grainy-gradients.vercel.app/noise.svg')]" />
+        </div>
         
-        <div className="mt-12 flex justify-center">
-           <div className="flex items-center gap-8 text-slate-500 whitespace-nowrap overflow-x-auto pb-4 px-4 no-scrollbar">
+        {/* Tags with premium styling */}
+        <div className="mt-16 flex justify-center">
+           <div className="flex items-center gap-10 text-slate-500 whitespace-nowrap overflow-x-auto pb-6 px-10 no-scrollbar mask-fade-edges">
               {['Toiture en tôle', 'Toit plat', 'Nettoyage mousse', 'Peinture anticorrosion'].map((tag) => (
-                <span key={tag} className="text-xs font-bold uppercase tracking-widest flex items-center gap-2">
-                   <div className="w-1.5 h-1.5 rounded-full bg-gold/50" />
+                <span key={tag} className="text-[10px] font-black uppercase tracking-[0.3em] flex items-center gap-3 hover:text-gold transition-colors duration-300">
+                   <div className="w-2 h-2 rounded-full bg-gold/40 shadow-[0_0_10px_rgba(212,175,55,0.3)]" />
                    {tag}
                 </span>
               ))}
