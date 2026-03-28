@@ -4,23 +4,25 @@ import { motion, useScroll } from 'framer-motion';
 import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
 
+import heroImage from '@/assets/hero_roof.png';
+
 const Hero = () => {
   const containerRef = useRef(null);
   
   useGSAP(() => {
     const tl = gsap.timeline({ defaults: { ease: 'power4.out', duration: 1.2 } });
 
-    // Animation d'entrée premium
-    tl.from('.hero-badge', { opacity: 0, y: 20, duration: 0.8 }, 0.2)
+    // Animation d'entrée premium (Fail-safe with autoAlpha)
+    tl.from('.hero-badge', { autoAlpha: 0, y: 20, duration: 0.8 }, 0.2)
       .from('.hero-title-line', { 
         y: 100, 
-        opacity: 0, 
+        autoAlpha: 0, 
         stagger: 0.2, 
         duration: 1.5 
       }, 0.4)
-      .from('.hero-subtitle', { opacity: 0, y: 30 }, 0.8)
-      .from('.hero-features div', { opacity: 0, scale: 0.9, stagger: 0.1 }, 1)
-      .from('.hero-cta', { opacity: 0, y: 20, stagger: 0.2 }, 1.2);
+      .from('.hero-subtitle', { autoAlpha: 0, y: 30 }, 0.8)
+      .from('.hero-features div', { autoAlpha: 0, scale: 0.9, stagger: 0.1 }, 1)
+      .from('.hero-cta', { autoAlpha: 0, y: 20, stagger: 0.2 }, 1.2);
   }, { scope: containerRef });
 
   return (
@@ -35,7 +37,7 @@ const Hero = () => {
           className="absolute inset-0"
         >
           <img 
-            src="/assets/images/hero_roof.png" 
+            src={heroImage} 
             alt="Toiture Premium Tahiti"
             className="w-full h-full object-cover brightness-[0.35]"
           />
@@ -124,7 +126,7 @@ const Hero = () => {
             {/* Main Visual Card with Tilt Effect */}
             <div className="aspect-[4/5] rounded-[2.5rem] overflow-hidden border border-white/10 shadow-2xl relative group transform-gpu transition-transform duration-500 hover:rotate-x-2 hover:rotate-y-2">
               <img 
-                src="/assets/images/hero_roof.png" 
+                src={heroImage} 
                 alt="Expertise Toiture"
                 className="absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition-transform duration-1000"
               />

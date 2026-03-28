@@ -23,7 +23,7 @@ const BeforeAfter = () => {
         start: 'top 85%',
       },
       y: 30,
-      opacity: 0,
+      autoAlpha: 0,
       duration: 1,
       ease: 'power3.out'
     });
@@ -34,7 +34,7 @@ const BeforeAfter = () => {
         start: 'top 80%',
       },
       scale: 0.95,
-      opacity: 0,
+      autoAlpha: 0,
       duration: 1.2,
       ease: 'power4.out'
     });

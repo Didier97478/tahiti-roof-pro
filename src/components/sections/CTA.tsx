@@ -18,7 +18,7 @@ const CTA = () => {
       },
       scale: 0.98,
       y: 40,
-      opacity: 0,
+      autoAlpha: 0,
       duration: 1.2,
       ease: 'power4.out'
     });
@@ -29,7 +29,7 @@ const CTA = () => {
         start: 'top 75%',
       },
       x: -20,
-      opacity: 0,
+      autoAlpha: 0,
       stagger: 0.1,
       duration: 0.8,
       ease: 'power2.out',

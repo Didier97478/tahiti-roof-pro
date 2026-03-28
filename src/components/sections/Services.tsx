@@ -4,6 +4,8 @@ import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
+import heroImage from '@/assets/hero_roof.png';
+
 gsap.registerPlugin(ScrollTrigger);
 
 const services = [
@@ -13,7 +15,7 @@ const services = [
     icon: Wrench,
     className: 'md:col-span-2 md:row-span-2',
     gradient: 'from-gold/20 via-gold/5 to-transparent',
-    image: '/assets/images/hero_roof.png', // Reusing the high-quality image
+    image: heroImage, // ES import for Lovable stability
   },
   {
     title: 'Nettoyage & Traitement',
@@ -49,7 +51,7 @@ const Services = () => {
         start: 'top 85%',
       },
       y: 50,
-      opacity: 0,
+      autoAlpha: 0,
       duration: 1,
       ease: 'power3.out'
     });
@@ -61,7 +63,7 @@ const Services = () => {
         start: 'top 80%',
       },
       y: 60,
-      opacity: 0,
+      autoAlpha: 0,
       duration: 1.2,
       stagger: 0.15,
       ease: 'power4.out'
