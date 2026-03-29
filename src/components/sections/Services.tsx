@@ -113,7 +113,7 @@ const Services = () => {
                   <img
                     src={service.image}
                     alt={service.title}
-                    className="w-full h-full object-cover brightness-[0.5] group-hover:brightness-[0.35] transition-all duration-1000"
+                    className="w-full h-full object-cover brightness-[0.7] group-hover:brightness-[0.55] transition-all duration-1000"
                   />
                 </div>
               )}
@@ -123,17 +123,18 @@ const Services = () => {
                 <div className="absolute inset-0 z-[1] opacity-0 group-hover:opacity-100 transition-opacity duration-700">
                   <video
                     src={service.video}
+                    poster={service.image}
                     autoPlay
                     muted
                     loop
                     playsInline
-                    className="w-full h-full object-cover brightness-[0.35] scale-105"
+                    className="w-full h-full object-cover brightness-[0.5] scale-105"
                   />
                 </div>
               )}
 
               {/* Gradients overlay */}
-              <div className="absolute inset-0 z-[2] bg-gradient-to-t from-slate-950 via-slate-950/50 to-slate-950/20" />
+              <div className="absolute inset-0 z-[2] bg-gradient-to-t from-slate-950 via-slate-950/30 to-slate-950/20" />
               <div className={`absolute inset-0 z-[2] bg-gradient-to-br ${service.gradient} opacity-0 group-hover:opacity-100 transition-opacity duration-700`} />
 
               {/* Content */}
@@ -175,7 +176,7 @@ const Services = () => {
             <img
               src={imgToitureVerte}
               alt="Expertise Tropicale"
-              className="absolute inset-0 w-full h-full object-cover brightness-[0.4]"
+              className="absolute inset-0 w-full h-full object-cover brightness-[0.6]"
             />
             <div className="absolute inset-0 bg-gradient-to-r from-slate-950 via-slate-950/70 to-transparent" />
             <div className="relative z-10 p-10 md:p-14 flex flex-col md:flex-row items-center justify-between gap-8">
@@ -203,7 +204,7 @@ const Services = () => {
         </div>
 
         {/* Galerie 6 vidéos */}
-        <div className="mt-24">
+        <div id="gallery" className="mt-24">
           <div className="text-center mb-14 space-y-4">
             <p className="text-gold font-bold uppercase tracking-[0.4em] text-[10px]">
               Nos Chantiers en Action
@@ -227,6 +228,7 @@ const Services = () => {
               >
                 <video
                   src={vid.src}
+                  poster={imgToitureVerte}
                   controls
                   muted
                   playsInline

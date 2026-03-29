@@ -45,7 +45,7 @@ const BeforeAfter = () => {
 
   return (
     <section 
-      id="gallery" 
+      id="before-after" 
       ref={containerRef}
       className="section-padding bg-slate-900 overflow-hidden"
     >
