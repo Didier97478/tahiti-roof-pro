@@ -20,7 +20,7 @@ const CTA = () => {
       },
       scale: 0.98,
       y: 40,
-      autoAlpha: 0,
+      opacity: 0,
       duration: 1.2,
       ease: 'power4.out'
     });
@@ -31,7 +31,7 @@ const CTA = () => {
         start: 'top 75%',
       },
       x: -20,
-      autoAlpha: 0,
+      opacity: 0,
       stagger: 0.1,
       duration: 0.8,
       ease: 'power2.out',
@@ -110,7 +110,7 @@ const CTA = () => {
                   <img 
                     src={heroImage} 
                     alt="Toiture Tahiti"
-                    className="absolute inset-0 w-full h-full object-cover brightness-[0.3] group-hover:scale-110 transition-transform duration-1000"
+                    className="absolute inset-0 w-full h-full object-cover brightness-[0.5] group-hover:brightness-[0.4] group-hover:scale-110 transition-all duration-1000"
                   />
                   <div className="absolute inset-0 bg-gradient-to-br from-slate-950 via-transparent to-gold/20" />
                   

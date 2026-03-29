@@ -56,11 +56,11 @@ const Services = () => {
   useGSAP(() => {
     gsap.from('.services-header', {
       scrollTrigger: { trigger: '.services-header', start: 'top 85%' },
-      y: 50, autoAlpha: 0, duration: 1, ease: 'power3.out'
+      y: 50, opacity: 0, duration: 1, ease: 'power3.out'
     });
     gsap.from('.bento-item', {
       scrollTrigger: { trigger: '.bento-grid', start: 'top 80%' },
-      y: 60, autoAlpha: 0, duration: 1.2, stagger: 0.15, ease: 'power4.out'
+      y: 60, opacity: 0, duration: 1.2, stagger: 0.15, ease: 'power4.out'
     });
     gsap.from('.expertise-section', {
       scrollTrigger: { trigger: '.expertise-section', start: 'top 90%' },
