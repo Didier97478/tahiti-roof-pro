@@ -1,106 +1,84 @@
 import { useRef } from 'react';
 import { Phone, MessageSquare, ShieldCheck, Clock, MapPin } from 'lucide-react';
 import { motion } from 'framer-motion';
-import gsap from 'gsap';
-import { useGSAP } from '@gsap/react';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import Magnetic from '../ui/Magnetic';
 
 import heroImage from '@/assets/hero_roof.png';
 
-gsap.registerPlugin(ScrollTrigger);
-
 const CTA = () => {
-  const containerRef = useRef(null);
-
-  useGSAP(() => {
-    gsap.from('.cta-card', {
-      scrollTrigger: {
-        trigger: '.cta-card',
-        start: 'top 85%',
-      },
-      scale: 0.98,
-      y: 40,
-      opacity: 0,
-      duration: 1.2,
-      ease: 'power4.out'
-    });
-
-    gsap.from('.cta-item', {
-      scrollTrigger: {
-        trigger: '.cta-card',
-        start: 'top 75%',
-      },
-      x: -20,
-      opacity: 0,
-      stagger: 0.1,
-      duration: 0.8,
-      ease: 'power2.out',
-      delay: 0.3
-    });
-  }, { scope: containerRef });
-
   return (
-    <section 
-      id="contact" 
-      ref={containerRef}
-      className="section-padding bg-slate-950 relative overflow-hidden"
-    >
+    <section id="contact" className="section-padding bg-slate-950 relative overflow-hidden">
       {/* Decorative Gradients */}
       <div className="absolute top-0 left-1/4 w-[600px] h-[600px] bg-gold/10 blur-[150px] rounded-full -translate-x-1/2 -translate-y-1/2" />
       <div className="absolute bottom-0 right-1/4 w-[600px] h-[600px] bg-tropical/10 blur-[150px] rounded-full translate-x-1/2 translate-y-1/2" />
 
       <div className="max-w-7xl mx-auto px-6 relative z-10">
-        <div className="cta-card glass rounded-[3.5rem] p-10 md:p-20 border-white/5 overflow-hidden relative shadow-[0_0_80px_rgba(0,0,0,0.5)]">
-          <div className="grid lg:grid-cols-2 gap-16 items-center">
+        <div className="glass rounded-[3rem] p-8 md:p-16 border-white/10 overflow-hidden relative shadow-2xl">
+          <div className="grid lg:grid-cols-2 gap-12 items-center">
             {/* Left Content */}
-            <div className="space-y-10">
-              <div className="space-y-6">
-                <p className="text-gold font-bold uppercase tracking-[0.3em] text-[10px]">Prêt pour l'Excellence ?</p>
-                <h2 className="text-4xl md:text-6xl font-black text-white leading-[1.1] italic">
-                  Protégez votre <br />
-                  <span className="text-gradient not-italic">patrimoine</span>
+            <div className="space-y-8">
+              <motion.div
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.8 }}
+                className="space-y-4"
+              >
+                <h2 className="text-4xl md:text-6xl font-display italic text-white leading-tight">
+                  Prêt à <span className="text-gradient not-italic font-black">protéger</span> votre maison ?
                 </h2>
                 <p className="text-xl text-slate-400 max-w-lg leading-relaxed font-light">
-                  Sous le soleil et les pluies de Tahiti, votre toiture est votre première défense. Nos experts interviennent partout sur l'île.
+                  Ne laissez pas votre toiture se dégrader sous le soleil et la pluie de Tahiti. Nos experts interviennent partout sur l'île.
                 </p>
-              </div>
+              </motion.div>
 
-              <div className="space-y-6">
+              <div className="space-y-4">
                 {[
                   { icon: ShieldCheck, text: 'Inspection gratuite sans engagement' },
                   { icon: Clock, text: 'Devis détaillé sous 48h' },
                   { icon: MapPin, text: 'Service sur toute l\'île de Tahiti' },
-                ].map((item) => (
-                  <div key={item.text} className="cta-item flex items-center gap-4 text-white/90 group">
-                    <div className="w-12 h-12 rounded-2xl bg-gold/10 border border-gold/20 flex items-center justify-center text-gold group-hover:bg-gold group-hover:text-slate-950 transition-all duration-500 shadow-xl">
-                      <item.icon size={24} />
+                ].map((item, idx) => (
+                  <motion.div 
+                    key={item.text}
+                    initial={{ opacity: 0, x: -20 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: 0.1 * idx }}
+                    className="flex items-center gap-3 text-white/80"
+                  >
+                    <div className="w-10 h-10 rounded-xl bg-gold/10 flex items-center justify-center text-gold">
+                      <item.icon size={20} />
                     </div>
-                    <span className="font-black text-sm uppercase tracking-widest">{item.text}</span>
-                  </div>
+                    <span className="font-bold text-sm tracking-wide">{item.text}</span>
+                  </motion.div>
                 ))}
               </div>
 
-              <div className="flex flex-col sm:flex-row gap-6 pt-6">
-                <motion.a
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                  href="tel:+68987289350"
-                  className="flex items-center justify-center gap-3 px-10 py-6 bg-gold text-slate-950 rounded-2xl font-black text-xl shadow-2xl shadow-gold/30 hover:bg-gold-hover transition-all duration-500"
-                >
-                  <Phone size={24} fill="currentColor" />
-                  87 28 93 50
-                </motion.a>
-                <motion.a
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                  href="https://wa.me/68987289350"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center justify-center gap-3 px-10 py-6 glass border-gold/30 rounded-2xl font-black text-xl text-gold hover:bg-gold/10 transition-all duration-500"
-                >
-                  <MessageSquare size={24} />
-                  WhatsApp
-                </motion.a>
+              <div className="flex flex-col sm:flex-row gap-5 pt-4">
+                <Magnetic>
+                  <motion.a
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                    href="tel:+68987289350"
+                    className="flex items-center justify-center gap-3 px-10 py-5 bg-gold text-slate-950 rounded-2xl font-black text-xl shadow-2xl shadow-gold/20 hover:bg-gold-hover transition-all"
+                  >
+                    <Phone size={26} fill="currentColor" />
+                    87 28 93 50
+                  </motion.a>
+                </Magnetic>
+                <Magnetic strength={0.2}>
+                  <motion.a
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                    href="https://wa.me/68987289350"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center justify-center gap-3 px-10 py-5 glass border-gold/20 rounded-2xl font-bold text-xl text-gold hover:bg-gold/10 transition-all shadow-xl"
+                  >
+                    <MessageSquare size={26} />
+                    WhatsApp
+                  </motion.a>
+                </Magnetic>
               </div>
             </div>
 

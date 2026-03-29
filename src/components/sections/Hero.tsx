@@ -1,8 +1,7 @@
 import { useRef } from 'react';
 import { Phone, ArrowRight, CheckCircle2 } from 'lucide-react';
 import { motion, useScroll } from 'framer-motion';
-import gsap from 'gsap';
-import { useGSAP } from '@gsap/react';
+import Magnetic from '../ui/Magnetic';
 
 import heroImage from '@/assets/chantier_maison_rouge.jpg';
 import heroCleaningImage from '@/assets/chantier_nettoyage.jpg';
@@ -10,26 +9,25 @@ import heroCleaningImage from '@/assets/chantier_nettoyage.jpg';
 const Hero = () => {
   const containerRef = useRef(null);
   
-  useGSAP(() => {
-    const tl = gsap.timeline({ defaults: { ease: 'power4.out', duration: 1.2 } });
+  const container = {
+    hidden: { opacity: 0 },
+    show: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.2
+      }
+    }
+  };
 
-    // Animation d'entrée premium (Fail-safe with autoAlpha)
-    tl.from('.hero-badge', { opacity: 0, y: 20, duration: 0.8 }, 0.2)
-      .from('.hero-title-line', { 
-        y: 100, 
-        opacity: 0, 
-        stagger: 0.2, 
-        duration: 1.5 
-      }, 0.4)
-      .from('.hero-subtitle', { opacity: 0, y: 30 }, 0.8)
-      .from('.hero-features div', { opacity: 0, scale: 0.9, stagger: 0.1 }, 1)
-      .from('.hero-cta', { opacity: 0, y: 20, stagger: 0.2 }, 1.2);
-  }, { scope: containerRef });
+  const item = {
+    hidden: { opacity: 0, y: 20 },
+    show: { opacity: 1, y: 0, transition: { duration: 0.8, ease: [0.33, 1, 0.68, 1] } }
+  };
 
   return (
     <section 
       ref={containerRef}
-      className="relative min-h-[95vh] flex items-center pt-20 overflow-hidden"
+      className="relative min-h-[90vh] flex items-center pt-20 overflow-hidden"
     >
       {/* Background with Parallax Image */}
       <div className="absolute inset-0 z-0 overflow-hidden">
@@ -40,9 +38,9 @@ const Hero = () => {
           <img 
             src={heroCleaningImage} 
             alt="Nettoyage Toiture Expert Tahiti"
-            className="w-full h-full object-cover brightness-[0.6] transition-all duration-1000"
+            className="w-full h-full object-cover brightness-[0.3] scale-105"
           />
-          <div className="absolute inset-0 bg-gradient-to-b from-slate-950/40 via-slate-950/60 to-slate-950" />
+          <div className="absolute inset-0 bg-gradient-to-b from-slate-950/20 via-slate-950/40 to-slate-950" />
           
           {/* Animated Mesh Noise Overlay */}
           <div className="absolute inset-0 opacity-[0.03] pointer-events-none bg-[url('https://grainy-gradients.vercel.app/noise.svg')]" />
@@ -52,70 +50,80 @@ const Hero = () => {
       <div className="max-w-7xl mx-auto px-6 relative z-10 w-full">
         <div className="grid lg:grid-cols-2 gap-16 items-center">
           {/* Left Content */}
-          <div className="space-y-8">
+          <motion.div
+            variants={container}
+            initial="hidden"
+            animate="show"
+            className="space-y-8"
+          >
             {/* Badge */}
-            <div className="hero-badge inline-flex items-center gap-2 px-4 py-2 rounded-full glass-gold border-gold/20">
-              <div className="w-2 h-2 rounded-full bg-gold animate-pulse-gold" />
+            <motion.div
+              variants={item}
+              className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass-gold border-gold/20"
+            >
+              <div className="w-2 h-2 rounded-full bg-gold animate-pulse" />
               <span className="text-xs font-bold uppercase tracking-wider text-gold">Expert Couvreur à Tahiti</span>
-            </div>
+            </motion.div>
 
             {/* Headline */}
-            <div className="space-y-6 overflow-hidden">
+            <motion.div variants={item} className="space-y-6">
               <h1 className="text-6xl md:text-8xl font-display italic leading-[1] text-white">
-                <span className="hero-title-line block">Votre toit</span>
-                <span className="hero-title-line block text-gradient not-italic font-black">mérite l'excellence</span>
+                Votre toit <br />
+                <span className="text-gradient not-italic font-black">mérite l'excellence</span>
               </h1>
-              <p className="hero-subtitle text-xl md:text-2xl text-slate-400 max-w-xl leading-relaxed font-light">
+              <p className="text-xl md:text-2xl text-slate-400 max-w-xl leading-relaxed font-light">
                 Artisan couvreur spécialisé en rénovation et protection de toitures tropicales à Tahiti.
               </p>
-            </div>
+            </motion.div>
 
             {/* Features List */}
-            <div className="hero-features grid sm:grid-cols-2 gap-4">
-              {['Devis gratuit sous 48h', 'Garantie décennale', 'Matériaux anticorrosion', 'Intervention rapide'].map((item) => (
-                <div key={item} className="flex items-center gap-2 text-slate-300">
+            <motion.div variants={item} className="grid sm:grid-cols-2 gap-4">
+              {['Devis gratuit sous 48h', 'Garantie décennale', 'Matériaux anticorrosion', 'Intervention rapide'].map((feature) => (
+                <div key={feature} className="flex items-center gap-2 text-slate-300">
                   <CheckCircle2 size={18} className="text-gold" />
-                  <span className="text-sm font-medium">{item}</span>
+                  <span className="text-sm font-medium">{feature}</span>
                 </div>
               ))}
-            </div>
+            </motion.div>
 
             {/* CTA Buttons */}
-            <div className="flex flex-col sm:flex-row gap-4 pt-4">
-              <motion.a
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                href="tel:+68987289350"
-                className="hero-cta flex items-center justify-center gap-2 px-8 py-4 bg-gold text-slate-950 rounded-2xl font-black text-lg shadow-2xl shadow-gold/20 hover:bg-gold-hover transition-all"
-              >
-                <Phone size={20} fill="currentColor" />
-                Appeler : 87 28 93 50
-              </motion.a>
-              <motion.a
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                href="https://wa.me/68987289350"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="hero-cta flex items-center justify-center gap-2 px-8 py-4 glass border-white/10 rounded-2xl font-bold text-lg hover:bg-white/5 transition-all"
-              >
-                WhatsApp
-                <ArrowRight size={20} />
-              </motion.a>
-            </div>
+            <motion.div variants={item} className="flex flex-col sm:flex-row gap-4 pt-4">
+              <Magnetic>
+                <motion.a
+                  whileHover={{ scale: 1.02 }}
+                  whileTap={{ scale: 0.98 }}
+                  href="tel:+68987289350"
+                  className="flex items-center justify-center gap-2 px-10 py-5 bg-gold text-slate-950 rounded-2xl font-black text-lg shadow-xl shadow-gold/20 hover:bg-gold-hover transition-all"
+                >
+                  <Phone size={22} fill="currentColor" />
+                  Appeler : 87 28 93 50
+                </motion.a>
+              </Magnetic>
+              <Magnetic strength={0.2}>
+                <motion.a
+                  whileHover={{ scale: 1.02 }}
+                  whileTap={{ scale: 0.98 }}
+                  href="https://wa.me/68987289350"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center justify-center gap-2 px-10 py-5 glass border-white/10 rounded-2xl font-bold text-lg hover:bg-white/5 transition-all text-white"
+                >
+                  WhatsApp
+                  <ArrowRight size={22} />
+                </motion.a>
+              </Magnetic>
+            </motion.div>
 
             {/* Micro Social Proof */}
             <motion.div 
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 2 }}
+              variants={item}
               className="pt-6"
             >
               <p className="text-sm text-slate-500 font-medium italic">
                 Papeete · Punaauia · Faa'a · Mahina · Arue...
               </p>
             </motion.div>
-          </div>
+          </motion.div>
 
           {/* Right Visual (Interactive Feature Card) */}
           <motion.div

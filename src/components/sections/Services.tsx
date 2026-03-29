@@ -8,6 +8,7 @@ import { motion } from 'framer-motion';
 import imgMaisonRouge from '@/assets/chantier_maison_rouge.jpg';
 import imgNettoyage from '@/assets/chantier_nettoyage.jpg';
 import imgToitureVerte from '@/assets/chantier_toiture_verte.jpg';
+import imgToitureVerte_avant from '@/assets/chantier_toiture_verte_avant.jpg';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -42,35 +43,61 @@ const services = [
 ];
 
 const galleryVideos = [
-  { src: '/videos/etancheite-complete.mp4', title: 'Étanchéité Complète', desc: 'Résine caoutchoutée sur tirefonds et boulons' },
-  { src: '/videos/peinture-2eme-couche.mp4', title: 'Peinture 2ème Couche', desc: 'Application en double couche pour durabilité maximale' },
-  { src: '/videos/peinture-anticorrosion.mp4', title: 'Traitement Anticorrosion', desc: 'Protection anti-rouille spéciale climat tropical' },
-  { src: '/videos/peinture-plaques-demo.mp4', title: 'Peinture Plaques', desc: 'Finition impeccable sur plaques ondulées' },
-  { src: '/videos/peinture-toiture-2eme-couche.mp4', title: 'Rénovation Complète', desc: 'Avant/après : un résultat spectaculaire' },
-  { src: '/videos/etancheite-resine.mp4', title: 'Résine d\'Étanchéité', desc: 'Imperméabilisation totale et durable' },
+  { 
+    src: '/videos/etancheite-complete.mp4', 
+    title: 'Étanchéité Tirefonds', 
+    desc: 'Application de résine sur points sensibles',
+    poster: imgMaisonRouge 
+  },
+  { 
+    src: '/videos/peinture-2eme-couche.mp4', 
+    title: 'Finition Rouge Terre', 
+    desc: 'Deuxième couche pour une brillance durable',
+    poster: imgNettoyage 
+  },
+  { 
+    src: '/videos/peinture-anticorrosion.mp4', 
+    title: 'Protection UV', 
+    desc: 'Traitement spécial haute résistance Polynésie',
+    poster: imgToitureVerte 
+  },
+  { 
+    src: '/videos/peinture-plaques-demo.mp4', 
+    title: 'Rénovation Tôle', 
+    desc: 'Application uniforme sur toiture ondulée',
+    poster: imgToitureVerte_avant 
+  },
+  { 
+    src: '/videos/peinture-toiture-2eme-couche.mp4', 
+    title: 'Savoir-Faire Expert', 
+    desc: 'Un travail de précision pour votre confort',
+    poster: imgMaisonRouge 
+  },
+  { 
+    src: '/videos/etancheite-resine.mp4', 
+    title: 'Étanchéité Totale', 
+    desc: 'Barrage définitif contre les infiltrations',
+    poster: imgNettoyage 
+  },
 ];
 
 const Services = () => {
   const sectionRef = useRef(null);
 
-  useGSAP(() => {
-    gsap.from('.services-header', {
-      scrollTrigger: { trigger: '.services-header', start: 'top 85%' },
-      y: 50, opacity: 0, duration: 1, ease: 'power3.out'
-    });
-    gsap.from('.bento-item', {
-      scrollTrigger: { trigger: '.bento-grid', start: 'top 80%' },
-      y: 60, opacity: 0, duration: 1.2, stagger: 0.15, ease: 'power4.out'
-    });
-    gsap.from('.expertise-section', {
-      scrollTrigger: { trigger: '.expertise-section', start: 'top 90%' },
-      y: 30, opacity: 0, duration: 1, ease: 'power3.out'
-    });
-    gsap.from('.gallery-item', {
-      scrollTrigger: { trigger: '.gallery-grid', start: 'top 90%' },
-      y: 30, opacity: 0.5, duration: 1, stagger: 0.1, ease: 'power3.out'
-    });
-  }, { scope: sectionRef });
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    show: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.1
+      }
+    }
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 20 },
+    show: { opacity: 1, y: 0, transition: { duration: 0.8 } }
+  };
 
   return (
     <section
@@ -97,9 +124,16 @@ const Services = () => {
         </div>
 
         {/* Bento Grid — 3 cartes avec vidéos ET photos */}
-        <div className="bento-grid grid grid-cols-1 md:grid-cols-3 gap-5 auto-rows-[320px]">
+        <motion.div 
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true }}
+          className="bento-grid grid grid-cols-1 md:grid-cols-3 gap-5 auto-rows-[320px]"
+        >
           {services.map((service) => (
-            <div
+            <motion.div
+              variants={itemVariants}
               key={service.title}
               className={`
                 bento-item group relative glass rounded-[2.5rem] overflow-hidden flex flex-col justify-between
@@ -163,12 +197,18 @@ const Services = () => {
                   </div>
                 </div>
               </div>
-            </div>
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
 
         {/* Section Expertise Tropicale */}
-        <div className="expertise-section mt-5">
+        <motion.div 
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 1 }}
+          className="expertise-section mt-5"
+        >
           <div
             className="relative rounded-[2.5rem] overflow-hidden border border-white/5 hover:border-gold/30 transition-all duration-700"
             style={{ minHeight: '200px' }}
@@ -176,7 +216,7 @@ const Services = () => {
             <img
               src={imgToitureVerte}
               alt="Expertise Tropicale"
-              className="absolute inset-0 w-full h-full object-cover brightness-[0.75]"
+              className="absolute inset-0 w-full h-full object-cover brightness-[0.8]"
             />
             <div className="absolute inset-0 bg-gradient-to-r from-slate-950 via-slate-950/70 to-transparent" />
             <div className="relative z-10 p-10 md:p-14 flex flex-col md:flex-row items-center justify-between gap-8">
@@ -201,7 +241,7 @@ const Services = () => {
               </div>
             </div>
           </div>
-        </div>
+        </motion.div>
 
         {/* Galerie 6 vidéos */}
         <div id="gallery" className="mt-24">
@@ -228,7 +268,7 @@ const Services = () => {
               >
                 <video
                   src={vid.src}
-                  poster={imgToitureVerte}
+                  poster={vid.poster}
                   controls
                   muted
                   playsInline
