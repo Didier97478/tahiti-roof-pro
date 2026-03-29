@@ -63,12 +63,12 @@ const Services = () => {
       y: 60, autoAlpha: 0, duration: 1.2, stagger: 0.15, ease: 'power4.out'
     });
     gsap.from('.expertise-section', {
-      scrollTrigger: { trigger: '.expertise-section', start: 'top 85%' },
-      y: 40, autoAlpha: 0, duration: 1, ease: 'power3.out'
+      scrollTrigger: { trigger: '.expertise-section', start: 'top 90%' },
+      y: 30, opacity: 0, duration: 1, ease: 'power3.out'
     });
     gsap.from('.gallery-item', {
-      scrollTrigger: { trigger: '.gallery-grid', start: 'top 80%' },
-      y: 40, autoAlpha: 0, duration: 1, stagger: 0.1, ease: 'power3.out'
+      scrollTrigger: { trigger: '.gallery-grid', start: 'top 90%' },
+      y: 30, opacity: 0, duration: 1, stagger: 0.1, ease: 'power3.out'
     });
   }, { scope: sectionRef });
 
@@ -113,7 +113,7 @@ const Services = () => {
                   <img
                     src={service.image}
                     alt={service.title}
-                    className="w-full h-full object-cover brightness-[0.4] group-hover:brightness-[0.2] transition-all duration-1000"
+                    className="w-full h-full object-cover brightness-[0.5] group-hover:brightness-[0.35] transition-all duration-1000"
                   />
                 </div>
               )}
@@ -175,7 +175,7 @@ const Services = () => {
             <img
               src={imgToitureVerte}
               alt="Expertise Tropicale"
-              className="absolute inset-0 w-full h-full object-cover brightness-[0.25]"
+              className="absolute inset-0 w-full h-full object-cover brightness-[0.4]"
             />
             <div className="absolute inset-0 bg-gradient-to-r from-slate-950 via-slate-950/70 to-transparent" />
             <div className="relative z-10 p-10 md:p-14 flex flex-col md:flex-row items-center justify-between gap-8">

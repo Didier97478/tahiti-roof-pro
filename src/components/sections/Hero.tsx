@@ -40,7 +40,7 @@ const Hero = () => {
           <img 
             src={heroCleaningImage} 
             alt="Nettoyage Toiture Expert Tahiti"
-            className="w-full h-full object-cover brightness-[0.35]"
+            className="w-full h-full object-cover brightness-[0.45] transition-all duration-1000"
           />
           <div className="absolute inset-0 bg-gradient-to-b from-slate-950/40 via-slate-950/60 to-slate-950" />
           
@@ -129,7 +129,7 @@ const Hero = () => {
               <img 
                 src={heroImage} 
                 alt="Maison Toiture Tahiti"
-                className="absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition-transform duration-1000"
+                className="absolute inset-0 w-full h-full object-cover brightness-[0.8] group-hover:brightness-[0.7] group-hover:scale-105 transition-all duration-1000"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/20 to-transparent opacity-80" />
               
