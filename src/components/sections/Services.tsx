@@ -68,7 +68,7 @@ const Services = () => {
     });
     gsap.from('.gallery-item', {
       scrollTrigger: { trigger: '.gallery-grid', start: 'top 90%' },
-      y: 30, opacity: 0, duration: 1, stagger: 0.1, ease: 'power3.out'
+      y: 30, opacity: 0.5, duration: 1, stagger: 0.1, ease: 'power3.out'
     });
   }, { scope: sectionRef });
 
@@ -113,14 +113,14 @@ const Services = () => {
                   <img
                     src={service.image}
                     alt={service.title}
-                    className="w-full h-full object-cover brightness-[0.7] group-hover:brightness-[0.55] transition-all duration-1000"
+                    className="w-full h-full object-cover brightness-[0.8] group-hover:brightness-[0.6] transition-all duration-1000"
                   />
                 </div>
               )}
 
               {/* Vidéo en overlays au hover */}
               {service.video && (
-                <div className="absolute inset-0 z-[1] opacity-0 group-hover:opacity-100 transition-opacity duration-700">
+                <div className="absolute inset-0 z-[1] opacity-40 group-hover:opacity-100 transition-opacity duration-700">
                   <video
                     src={service.video}
                     poster={service.image}
@@ -128,13 +128,13 @@ const Services = () => {
                     muted
                     loop
                     playsInline
-                    className="w-full h-full object-cover brightness-[0.5] scale-105"
+                    className="w-full h-full object-cover brightness-[0.6] scale-105"
                   />
                 </div>
               )}
 
               {/* Gradients overlay */}
-              <div className="absolute inset-0 z-[2] bg-gradient-to-t from-slate-950 via-slate-950/30 to-slate-950/20" />
+              <div className="absolute inset-0 z-[2] bg-gradient-to-t from-slate-950 via-slate-950/20 to-slate-950/10" />
               <div className={`absolute inset-0 z-[2] bg-gradient-to-br ${service.gradient} opacity-0 group-hover:opacity-100 transition-opacity duration-700`} />
 
               {/* Content */}
@@ -176,7 +176,7 @@ const Services = () => {
             <img
               src={imgToitureVerte}
               alt="Expertise Tropicale"
-              className="absolute inset-0 w-full h-full object-cover brightness-[0.6]"
+              className="absolute inset-0 w-full h-full object-cover brightness-[0.75]"
             />
             <div className="absolute inset-0 bg-gradient-to-r from-slate-950 via-slate-950/70 to-transparent" />
             <div className="relative z-10 p-10 md:p-14 flex flex-col md:flex-row items-center justify-between gap-8">

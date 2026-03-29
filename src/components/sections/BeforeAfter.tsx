@@ -26,7 +26,7 @@ const BeforeAfter = () => {
         start: 'top 85%',
       },
       y: 30,
-      opacity: 0,
+      opacity: 0.5,
       duration: 1,
       ease: 'power3.out'
     });
@@ -37,7 +37,7 @@ const BeforeAfter = () => {
         start: 'top 80%',
       },
       scale: 0.95,
-      opacity: 0,
+      opacity: 0.5,
       duration: 1.2,
       ease: 'power4.out'
     });
@@ -73,7 +73,7 @@ const BeforeAfter = () => {
               alt="Toiture après rénovation"
               className="w-full h-full object-cover"
             />
-            <div className="absolute inset-0 bg-gradient-to-b from-transparent to-slate-950/30" />
+            <div className="absolute inset-0 bg-gradient-to-b from-transparent to-slate-950/10" />
           </div>
           
           {/* Before Image (Overlay) - Vraie photo AVANT */}
@@ -87,7 +87,7 @@ const BeforeAfter = () => {
                 alt="Toiture avant rénovation"
                 className="w-full h-full object-cover"
               />
-              <div className="absolute inset-0 bg-gradient-to-b from-transparent to-slate-950/30" />
+              <div className="absolute inset-0 bg-gradient-to-b from-transparent to-slate-950/10" />
             </div>
           </div>
 
