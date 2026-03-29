@@ -5,6 +5,9 @@ import { useGSAP } from '@gsap/react';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
 import heroImage from '@/assets/hero_roof.png';
+import imgNettoyage from '@/assets/chantier_nettoyage.jpg';
+import imgMaisonRouge from '@/assets/chantier_maison_rouge.jpg';
+import imgToitureVerte from '@/assets/chantier_toiture_verte.jpg';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -15,7 +18,7 @@ const services = [
     icon: Wrench,
     className: 'md:col-span-2 md:row-span-2',
     gradient: 'from-gold/20 via-gold/5 to-transparent',
-    image: heroImage, // ES import for Lovable stability
+    image: imgMaisonRouge,
   },
   {
     title: 'Nettoyage & Traitement',
@@ -23,13 +26,15 @@ const services = [
     icon: SprayCan,
     className: 'md:col-span-1 md:row-span-1',
     gradient: 'from-tropical/20 via-tropical/5 to-transparent',
+    image: imgNettoyage,
   },
   {
-    title: 'Étanchéité',
-    desc: 'Solutions d\'imperméabilisation avancées pour toits plats et tôles.',
+    title: 'Peinture & Étanchéité',
+    desc: 'Solutions d\'imperméabilisation avancées pour toits plats et tôles. Résultat longue durée.',
     icon: Droplets,
     className: 'md:col-span-1 md:row-span-1',
     gradient: 'from-amber-500/10 via-amber-500/5 to-transparent',
+    image: imgToitureVerte,
   },
   {
     title: 'Expertise Tropicale',

@@ -3,6 +3,9 @@ import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
+import imgAvant from '@/assets/chantier_toiture_verte_avant.jpg';
+import imgApres from '@/assets/chantier_toiture_verte.jpg';
+
 gsap.registerPlugin(ScrollTrigger);
 
 const BeforeAfter = () => {
@@ -63,20 +66,28 @@ const BeforeAfter = () => {
           onMouseMove={handleMove}
           onTouchMove={handleMove}
         >
-          {/* After Image (Background) - Placeholder text as per original code */}
-          <div className="absolute inset-0 bg-slate-800">
-             <div className="w-full h-full flex items-center justify-center bg-[radial-gradient(circle_at_center,rgba(212,175,55,0.05)_0%,transparent_70%)]">
-                <p className="text-gold font-black text-4xl opacity-20 uppercase tracking-[0.8em] italic">Après</p>
-             </div>
+          {/* After Image (Background) - Vraie photo APRÈS */}
+          <div className="absolute inset-0">
+            <img
+              src={imgApres}
+              alt="Toiture après rénovation"
+              className="w-full h-full object-cover"
+            />
+            <div className="absolute inset-0 bg-gradient-to-b from-transparent to-slate-950/30" />
           </div>
           
-          {/* Before Image (Overlay) */}
+          {/* Before Image (Overlay) - Vraie photo AVANT */}
           <div 
-            className="absolute inset-0 bg-slate-700 overflow-hidden border-r-2 border-gold/50"
+            className="absolute inset-0 overflow-hidden border-r-2 border-gold/80"
             style={{ width: `${sliderPosition}%` }}
           >
-            <div className="w-[100vw] h-full absolute top-0 left-0 bg-slate-700 flex items-center justify-center" style={{ width: '100vw' }}>
-               <p className="text-white font-black text-4xl opacity-20 uppercase tracking-[0.8em] italic">Avant</p>
+            <div className="absolute inset-0" style={{ width: `${100 / (sliderPosition / 100)}%`, maxWidth: 'none' }}>
+              <img
+                src={imgAvant}
+                alt="Toiture avant rénovation"
+                className="w-full h-full object-cover"
+              />
+              <div className="absolute inset-0 bg-gradient-to-b from-transparent to-slate-950/30" />
             </div>
           </div>
 

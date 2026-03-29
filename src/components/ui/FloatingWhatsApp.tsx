@@ -1,4 +1,4 @@
-import { MessageCircle } from 'lucide-react';
+import { WhatsAppIcon } from './BrandIcons';
 import { motion } from 'framer-motion';
 
 const FloatingWhatsApp = () => {
@@ -26,7 +26,7 @@ const FloatingWhatsApp = () => {
         rel="noopener noreferrer"
         className="relative w-16 h-16 bg-gold text-slate-950 rounded-full flex items-center justify-center shadow-2xl shadow-gold/40 border-4 border-slate-950 overflow-hidden"
       >
-        <MessageCircle size={32} fill="currentColor" className="animate-float" />
+        <WhatsAppIcon className="w-8 h-8 relative" color="#1a1a2e" />
         
         {/* Shine effect */}
         <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/30 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000" />

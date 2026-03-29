@@ -4,7 +4,8 @@ import { motion, useScroll } from 'framer-motion';
 import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
 
-import heroImage from '@/assets/hero_roof.png';
+import heroImage from '@/assets/chantier_maison_rouge.jpg';
+import heroCleaningImage from '@/assets/chantier_nettoyage.jpg';
 
 const Hero = () => {
   const containerRef = useRef(null);
@@ -37,8 +38,8 @@ const Hero = () => {
           className="absolute inset-0"
         >
           <img 
-            src={heroImage} 
-            alt="Toiture Premium Tahiti"
+            src={heroCleaningImage} 
+            alt="Nettoyage Toiture Expert Tahiti"
             className="w-full h-full object-cover brightness-[0.35]"
           />
           <div className="absolute inset-0 bg-gradient-to-b from-slate-950/40 via-slate-950/60 to-slate-950" />
@@ -127,7 +128,7 @@ const Hero = () => {
             <div className="aspect-[4/5] rounded-[2.5rem] overflow-hidden border border-white/10 shadow-2xl relative group transform-gpu transition-transform duration-500 hover:rotate-x-2 hover:rotate-y-2">
               <img 
                 src={heroImage} 
-                alt="Expertise Toiture"
+                alt="Maison Toiture Tahiti"
                 className="absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition-transform duration-1000"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/20 to-transparent opacity-80" />

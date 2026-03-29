@@ -1,5 +1,5 @@
-// Removed unused React import
-import { Phone, Mail, MapPin, Globe, MessageCircle, ChevronRight } from 'lucide-react';
+import { Phone, Mail, MapPin, ChevronRight } from 'lucide-react';
+import { WhatsAppIcon, FacebookIcon } from '@/components/ui/BrandIcons';
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
@@ -37,11 +37,23 @@ const Footer = () => {
               Expert couvreur à Tahiti spécialisé dans la protection et la rénovation de toitures tropicales. Qualité premium et intervention rapide sur toute l'île.
             </p>
             <div className="flex items-center gap-4">
-              <a href="#" className="w-10 h-10 rounded-full glass-gold flex items-center justify-center text-gold hover:bg-gold hover:text-slate-950 transition-all duration-300">
-                <Globe size={18} />
+              <a
+                href="https://wa.me/68987289350"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-10 h-10 rounded-full bg-[#25D366]/10 border border-[#25D366]/30 flex items-center justify-center text-[#25D366] hover:bg-[#25D366] hover:text-white transition-all duration-300"
+                aria-label="WhatsApp"
+              >
+                <WhatsAppIcon className="w-5 h-5" />
               </a>
-              <a href="#" className="w-10 h-10 rounded-full glass-gold flex items-center justify-center text-gold hover:bg-gold hover:text-slate-950 transition-all duration-300">
-                <MessageCircle size={18} />
+              <a
+                href="https://www.facebook.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-10 h-10 rounded-full bg-[#1877F2]/10 border border-[#1877F2]/30 flex items-center justify-center text-[#1877F2] hover:bg-[#1877F2] hover:text-white transition-all duration-300"
+                aria-label="Facebook"
+              >
+                <FacebookIcon className="w-5 h-5" />
               </a>
             </div>
           </div>
